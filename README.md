@@ -1,4 +1,4 @@
-# 🍻 Camera Card
+# 📺 Camera Card
 
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
