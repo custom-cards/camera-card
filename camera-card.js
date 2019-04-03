@@ -11,8 +11,25 @@ class CameraCard extends LitElement {
     };
   }
 
+  shouldUpdate(changedProps) {
+    if (changedProps.has("_config")) {
+      return true;
+    }
+
+    const oldHass = changedProps.get("hass");
+
+    if (oldHass) {
+      return (
+        oldHass.states[this._config.entity] !==
+        this.hass.states[this._config.entity]
+      );
+    }
+
+    return true;
+  }
+
   getCardSize() {
-    return 1;
+    return 6;
   }
 
   setConfig(config) {
@@ -28,6 +45,7 @@ class CameraCard extends LitElement {
 
     if (!stateObj) {
       return html`
+        ${this.renderStyle()}
         <ha-card>
           <div class="warning">
             Entity not available: ${this._config.entity}
@@ -38,7 +56,7 @@ class CameraCard extends LitElement {
 
     return html`
       ${this.renderStyle()}
-      <ha-card>
+      <ha-card .header=${this._config.name}>
         <more-info-camera
           .hass="${this.hass}"
           .stateObj="${stateObj}"
