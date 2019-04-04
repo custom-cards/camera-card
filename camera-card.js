@@ -60,6 +60,7 @@ class CameraCard extends LitElement {
         <more-info-camera
           .hass="${this.hass}"
           .stateObj="${stateObj}"
+          @click="${this._moreInfo}"
         ></more-info-camera>
       </ha-card>
     `;
@@ -74,8 +75,33 @@ class CameraCard extends LitElement {
           background-color: #fce588;
           padding: 8px;
         }
+
+        more-info-camera {
+          cursor: pointer;
+        }
       </style>
     `;
+  }
+
+  _moreInfo() {
+    this._fireEvent(this, "hass-more-info", {
+      entityId: this._config.entity
+    });
+  }
+
+  _fireEvent(node, type, detail, options) {
+    options = options || {};
+    detail = detail === null || detail === undefined ? {} : detail;
+    const event = new Event(type, {
+      bubbles: options.bubbles === undefined ? true : options.bubbles,
+      cancelable: Boolean(options.cancelable),
+      composed: options.composed === undefined ? true : options.composed
+    });
+
+    event.detail = detail;
+    node.dispatchEvent(event);
+
+    return event;
   }
 }
 
