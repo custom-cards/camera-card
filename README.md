@@ -1,3 +1,5 @@
+# This cards should NOT be used and is no longer maintained. [Release 0.92](https://www.home-assistant.io/blog/2019/04/24/release-92/#lovelace-streams-cameras) now supports camera streams in picture cards and is the preferred method.
+
 # 📺 Camera Card
 
 [![GitHub Release][releases-shield]][releases]
